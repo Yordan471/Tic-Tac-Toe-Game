@@ -119,11 +119,6 @@ namespace Tic_Tac_Toe
             }
         }
 
-        public static void CheckForWinner(char[,] ticTacToeBoard)
-        {
-
-        }
-
         public static bool CheckHorizontalPattern(char[,] ticTacToeBoard, char symbolForPlayer)
         {
             //Going through the board to check if we have horizontal winning pattern
