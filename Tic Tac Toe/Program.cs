@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,20 +15,38 @@ namespace Tic_Tac_Toe
             char[,] ticTacToeBoard = InitializeTheBoard();
 
             int player = 1;
+            int numberOfGames = 3;
 
             Console.WriteLine("How many games would you like to play?");
-            Console.Write("----> ");
-
-            string numberOfGames = Console.ReadLine();
-
+            Console.Write("Choose from (0 - 9) ---> ");
             
+            while (true)
+            {
+                string numberOfGamesString = Console.ReadLine();
+                bool isDigit = false;
+                
+
+                if (int.TryParse(numberOfGamesString, out numberOfGames))
+                {
+                    isDigit = true;
+                }
+
+                if (isDigit == false)
+                {
+                    Console.WriteLine("Invalid number for games!");
+                    Console.WriteLine("Try again...");
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
 
             int countGames = 0;
 
-            while (countGames != int.Parse(numberOfGames))
+            while (countGames != numberOfGames)
             {
-                countGames++;
-
                 PrintTicTacToeBoard(ticTacToeBoard);
 
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -96,6 +115,7 @@ namespace Tic_Tac_Toe
 
                     // Multiply by -1 so we can change players turns
                     player *= -1;
+                    countGames++;
             }
         }
 
