@@ -24,7 +24,7 @@ namespace Tic_Tac_Toe
             {
                 PrintTicTacToeBoard(ticTacToeBoard);
                 Console.WriteLine();
-                Console.WriteLine($"Player {(player == -1? '1' : '2')}'s turn");
+                Console.WriteLine($"Player {(player == 1? 'X' : 'O')} turn");
                 Console.WriteLine("Row: (0-2): ");
                 int row = int.Parse(Console.ReadLine());
 
@@ -32,7 +32,8 @@ namespace Tic_Tac_Toe
                 int col = int.Parse(Console.ReadLine());
 
                 if (row < 0 || row > ticTacToeBoard.GetLength(0) ||
-                    col < 0 || col > ticTacToeBoard.GetLength(1))
+                    col < 0 || col > ticTacToeBoard.GetLength(1) ||
+                    ticTacToeBoard[row, col] != '_')
                 {
                     Console.WriteLine("Invalid coordinates!");
                     Console.WriteLine("Try again...");
@@ -41,7 +42,7 @@ namespace Tic_Tac_Toe
 
                 char symbolForPlayer = 'X';
 
-                if (player == 2)
+                if (player == -1)
                 {
                     symbolForPlayer = 'O';
                 }
@@ -50,7 +51,7 @@ namespace Tic_Tac_Toe
                 // Clearing the Console
                 Console.Clear();                
 
-                player = -1;
+                player *= -1;
             }
 
             
