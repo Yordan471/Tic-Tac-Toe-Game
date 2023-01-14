@@ -66,8 +66,8 @@ namespace Tic_Tac_Toe
 
                 //Ckecking if the player chose coordinates that are not valid
                 //and if the coordinates are empty
-                if (row < 0 || row > ticTacToeBoard.GetLength(0) ||
-                    col < 0 || col > ticTacToeBoard.GetLength(1) ||
+                if (row < 0 || row >= ticTacToeBoard.GetLength(0) ||
+                    col < 0 || col >= ticTacToeBoard.GetLength(1) ||
                     ticTacToeBoard[row, col] != '_')
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
