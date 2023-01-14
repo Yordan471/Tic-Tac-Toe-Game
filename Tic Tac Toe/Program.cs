@@ -18,14 +18,13 @@ namespace Tic_Tac_Toe
             int numberOfGames = 3;
 
             Console.WriteLine("How many games would you like to play?");
-            Console.Write("Choose from (0 - 9) ---> ");
+            Console.Write(" ---> ");
             
             while (true)
             {
                 string numberOfGamesString = Console.ReadLine();
                 bool isDigit = false;
                 
-
                 if (int.TryParse(numberOfGamesString, out numberOfGames))
                 {
                     isDigit = true;
