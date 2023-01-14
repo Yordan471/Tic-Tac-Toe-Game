@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
@@ -18,7 +19,7 @@ namespace Tic_Tac_Toe
             int numberOfGames = 3;
 
             Console.WriteLine("How many games would you like to play?");
-            Console.Write(" ---> ");
+            Console.Write("---> ");
             
             while (true)
             {
@@ -32,6 +33,7 @@ namespace Tic_Tac_Toe
 
                 if (isDigit == false)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid number for games!");
                     Console.WriteLine("Try again...");
                     continue;
@@ -43,6 +45,9 @@ namespace Tic_Tac_Toe
             }
 
             int countGames = 0;
+            int countXPlayerWins = 0;
+            int countTies = 0;
+            int countOPlayerWins = 0;
 
             while (countGames != numberOfGames)
             {
@@ -91,30 +96,65 @@ namespace Tic_Tac_Toe
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine($"Player {symbolForPlayer} won the game!");
 
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Press any key to start new game.");
+                    if (countGames + 1 != numberOfGames)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Press any key to start new game.");
+                    }
+
                     Console.ReadLine();
                     Console.Clear();
 
+                    CountWinsAndTies(ref countXPlayerWins, ref countTies, ref countOPlayerWins, symbolForPlayer);
+
+                    countGames++;
                     ticTacToeBoard = InitializeTheBoard();
                 }
 
                 if (GameIsTie(ticTacToeBoard))
                 {
-                    Console.ForegroundColor= ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("Game is a tie!");
 
+                    if (countGames + 1 != numberOfGames)
+                    {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Press any key to start new game.");
+                    }
+
                     Console.ReadLine();
                     Console.Clear();
 
-                    ticTacToeBoard = InitializeTheBoard();
-                }
+                    CountWinsAndTies(ref countXPlayerWins, ref countTies, ref countOPlayerWins, symbolForPlayer);
 
-                    // Multiply by -1 so we can change players turns
-                    player *= -1;
                     countGames++;
+                    ticTacToeBoard = InitializeTheBoard();
+                }               
+
+                // Multiply by -1 so we can change players turns
+                player *= -1;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"Player X Won {countXPlayerWins} out of {numberOfGames} games");
+            Console.WriteLine($"Player O Won {countOPlayerWins} out of {numberOfGames} games");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"Tied games {countTies} out of {numberOfGames}");
+        }
+
+        private static void CountWinsAndTies(ref int countXPlayerWins, ref int countTies, ref int countOPlayerWins, char symbolForPlayer)
+        {
+            switch (symbolForPlayer)
+            {
+                case 'O':
+                    countOPlayerWins++;
+                    break;
+                case 'X':
+                    countXPlayerWins++;
+                    break;
+                default:
+                    countTies++;
+                    break;
             }
         }
 
