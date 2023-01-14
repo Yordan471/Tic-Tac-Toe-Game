@@ -56,11 +56,11 @@ namespace Tic_Tac_Toe
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine();
                 Console.WriteLine($"Player {(player == 1 ? 'X' : 'O')} turn");
-                Console.WriteLine("Row: (0-2): ");
+                Console.Write("Row: (0-2): ");
 
                 int row = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("Column: (0-2): ");
+                Console.Write("Column: (0-2): ");
                 int col = int.Parse(Console.ReadLine());
 
                 //Ckecking if the player chose coordinates that are not valid
