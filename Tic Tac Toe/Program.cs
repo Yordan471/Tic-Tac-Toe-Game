@@ -15,10 +15,22 @@ namespace Tic_Tac_Toe
 
             int player = 1;
 
-            while (true)
+            Console.WriteLine("How many games would you like to play?");
+            Console.Write("----> ");
+
+            string numberOfGames = Console.ReadLine();
+
+            
+
+            int countGames = 0;
+
+            while (countGames != int.Parse(numberOfGames))
             {
+                countGames++;
+
                 PrintTicTacToeBoard(ticTacToeBoard);
 
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine();
                 Console.WriteLine($"Player {(player == 1 ? 'X' : 'O')} turn");
                 Console.WriteLine("Row: (0-2): ");
@@ -34,6 +46,7 @@ namespace Tic_Tac_Toe
                     col < 0 || col > ticTacToeBoard.GetLength(1) ||
                     ticTacToeBoard[row, col] != '_')
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid coordinates!");
                     Console.WriteLine("Try again...");
                     continue;
@@ -57,7 +70,10 @@ namespace Tic_Tac_Toe
                     CheckVerticalPattern(ticTacToeBoard, symbolForPlayer) ||
                     CheckDiagonalsPattern(ticTacToeBoard, symbolForPlayer))
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine($"Player {symbolForPlayer} won the game!");
+
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Press any key to start new game.");
                     Console.ReadLine();
                     Console.Clear();
@@ -67,7 +83,10 @@ namespace Tic_Tac_Toe
 
                 if (GameIsTie(ticTacToeBoard))
                 {
+                    Console.ForegroundColor= ConsoleColor.DarkGray;
                     Console.WriteLine("Game is a tie!");
+
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Press any key to start new game.");
                     Console.ReadLine();
                     Console.Clear();
@@ -106,6 +125,7 @@ namespace Tic_Tac_Toe
 
         public static void PrintTicTacToeBoard(char[,] ticTacToeBoard)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Tic Tac Toe Board");
 
             for (int row = 0; row < ticTacToeBoard.GetLength(0); row++)
