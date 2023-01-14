@@ -18,6 +18,7 @@ namespace Tic_Tac_Toe
             int player = 1;
             int numberOfGames = 3;
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("How many games would you like to play?");
             Console.Write("---> ");
             
@@ -84,16 +85,16 @@ namespace Tic_Tac_Toe
 
                 //Setting sumbol on the board;
                 ticTacToeBoard[row, col] = symbolForPlayer;
-
-                // Clearing the Console
-                Console.Clear();
-
+           
                 // Check if we have winning patter
                 if (CheckHorizontalPattern(ticTacToeBoard, symbolForPlayer) ||
                     CheckVerticalPattern(ticTacToeBoard, symbolForPlayer) ||
                     CheckDiagonalsPattern(ticTacToeBoard, symbolForPlayer))
                 {
+                    PrintTicTacToeBoard(ticTacToeBoard);
+
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine();
                     Console.WriteLine($"Player {symbolForPlayer} won the game!");
 
                     if (countGames + 1 != numberOfGames)
@@ -113,7 +114,10 @@ namespace Tic_Tac_Toe
 
                 if (GameIsTie(ticTacToeBoard))
                 {
+                    PrintTicTacToeBoard(ticTacToeBoard);
+
                     Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine();
                     Console.WriteLine("Game is a tie!");
 
                     if (countGames + 1 != numberOfGames)
@@ -129,7 +133,10 @@ namespace Tic_Tac_Toe
 
                     countGames++;
                     ticTacToeBoard = InitializeTheBoard();
-                }               
+                }
+
+                // Clearing the Console
+                Console.Clear();
 
                 // Multiply by -1 so we can change players turns
                 player *= -1;
